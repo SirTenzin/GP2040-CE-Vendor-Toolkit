@@ -38,7 +38,7 @@ export default function Configurator() {
 
 
 
-  // Function to check for keys in requiredOptions with value still equal to -2
+  // Function to check for keys in requiredOptions
   const checkForMissingValues = (): boolean => {
     // Iterate through requiredOptions
     for (const option of requiredOptions) {
@@ -54,7 +54,7 @@ export default function Configurator() {
   // Check for duplicate values
   const hasDuplicates = hasDuplicateValues();
 
-  // Check for keys in requiredOptions with value still equal to -2
+  // Check for keys in requiredOptions
   const missingRequiredOption = checkForMissingValues();
 
 
