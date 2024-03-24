@@ -5,7 +5,7 @@ This program includes tools for vendors creating GP2040-CE controllers. Current 
 - [x] Board Config Generator
 - [ ] Input Tester
 
-This app was made with the [Electron-React boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate) and [DaisyUI](https://daisyui.com).
+This app was made with the [Electron-React-Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate) and [DaisyUI](https://daisyui.com).
 
 ## Board Config Generator
 
