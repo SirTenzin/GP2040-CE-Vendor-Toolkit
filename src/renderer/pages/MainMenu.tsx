@@ -8,6 +8,16 @@ export default function MainMenu() {
   const goToConfig = () => {
     navigate('/configurator');
   };
+
+  const goToVendorDocs = () => {
+    navigate('/docs');
+  }
+
+  const goToDocs = () => {
+    return window.electron.ipcRenderer.sendMessage("ipc", ["openDocs"])
+  };
+
+
   return (
     <div className="flex flex-col justify-center min-h-screen">
       <WindowActions title="GP2040-CE Vendor Toolkit | Select a tool to begin" />
@@ -34,7 +44,7 @@ export default function MainMenu() {
           buttonText="Read"
           textColor="white"
           bgColor="base-200"
-          onClick = {() => {}}
+          onClick = {goToVendorDocs}
         />
         <Card
           title="GP2040-CE Documentation"
@@ -42,7 +52,7 @@ export default function MainMenu() {
           buttonText="Read"
           textColor="white"
           bgColor="base-200"
-          onClick = {() => {}}
+          onClick = {goToDocs}
         />
       </div>
     </div>

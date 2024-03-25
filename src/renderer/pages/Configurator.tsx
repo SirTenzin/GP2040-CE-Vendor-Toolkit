@@ -5,9 +5,10 @@ import MovementKeysForm from "./MovementKeysForm";
 import AuxiliaryKeysForm from "./AuxiliaryKeysForm";
 import { FormEvent, useState } from "react";
 import Modal from "../components/Modal";
+import PrerequisiteForm from "./PrerequisiteForm";
 
 interface FormData {
-  [key: string]: number | undefined;
+  [key: string]: number | string | undefined;
 }
 
 const initialData: FormData = {};
@@ -25,6 +26,7 @@ export default function Configurator() {
     })
   }
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next, goTo } = useMultistepForm([
+      <PrerequisiteForm updateFields={updateFields} />,
       <MovementKeysForm updateFields={updateFields} />,
       <ActionKeysForm  updateFields={updateFields} />,
       <AuxiliaryKeysForm updateFields={updateFields} />,

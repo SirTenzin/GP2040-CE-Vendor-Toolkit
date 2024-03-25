@@ -3,6 +3,7 @@ import WindowActions from './components/WindowActions';
 import MainMenu from './pages/MainMenu';
 import Configurator from './pages/Configurator';
 import './App.css';
+import VendorDocs from './pages/VendorDocs';
 
 function Home() {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<MainMenu />} />
         <Route path="/configurator" element={<Configurator />} />
+        <Route path="/docs" element={<VendorDocs />} />
       </Routes>
     </Router>
   );
