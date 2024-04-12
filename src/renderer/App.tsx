@@ -12,7 +12,7 @@ function Home() {
     navigate('/menu');
   };
   return (
-   <div>
+   <div className="imgbg">
     <WindowActions />
     <div className='body-bg'>
       <div className="hero h-screen w-screen">

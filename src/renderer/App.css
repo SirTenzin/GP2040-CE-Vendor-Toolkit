@@ -11,15 +11,19 @@ body {
   position: relative;
   color: white;
   height: 100vh;
-  background: #7F92A0;
-  background-image: url("assets/GP2040-CE Mixed Motif Pattern.png");
-  background-size: 100%;
+  background: rgb(30, 41, 59);
+  /* background-size: 100%; */
+  /* filter: brightness(60%); */
   font-family: sans-serif;
   overflow-y: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   -webkit-app-region: drag;
+}
+
+.imgbg {
+  background-image: url("assets/GP2040-CE Mixed Motif Pattern.png");
 }
 
 .body-bg {
@@ -43,7 +47,7 @@ button {
   -webkit-app-region: no-drag;
 }
 
-input, select, textarea {
+input, select, textarea, .dropdown {
   -webkit-app-region: no-drag;
 }
 
