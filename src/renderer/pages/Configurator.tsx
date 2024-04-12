@@ -3,9 +3,10 @@ import { useMultistepForm } from "../useMultiStepForm";
 import ActionKeysForm from "./ActionKeysForm";
 import MovementKeysForm from "./MovementKeysForm";
 import AuxiliaryKeysForm from "./AuxiliaryKeysForm";
+import DefaultsForm from "./DefaultsForm";
+import PrerequisiteForm from "./PrerequisiteForm";
 import { FormEvent, useState } from "react";
 import Modal from "../components/Modal";
-import PrerequisiteForm from "./PrerequisiteForm";
 
 interface FormData {
   [key: string]: number | string | undefined;
@@ -14,7 +15,9 @@ interface FormData {
 const initialData: FormData = {};
 
 const requiredOptions: string[] = [
-  "up", "down", "left", "right", "a", "b" , "x", "y", "lb", "lt", "rb", "rt"
+  "up", "down", "left", "right", "a", "b" , "x", "y", "lb", "lt", "rb", "rt",
+  "start", "select", "home", "movement key layout", "action key layout",
+  "forced setup mode", "socd mode", "input mode", "dpad mode"
 ]
 
 
@@ -27,56 +30,57 @@ export default function Configurator() {
   }
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next, goTo } = useMultistepForm([
       <PrerequisiteForm updateFields={updateFields} />,
+      <DefaultsForm updateFields={updateFields} />,
       <MovementKeysForm updateFields={updateFields} />,
       <ActionKeysForm  updateFields={updateFields} />,
       <AuxiliaryKeysForm updateFields={updateFields} />,
   ])
 
   const hasDuplicateValues = (): boolean => {
-    const valuesArray = Object.values(data);
+    let valuesArray = Object.values(data)
     const uniqueValues = new Set(valuesArray);
+    console.log(uniqueValues, valuesArray);
     return uniqueValues.size < valuesArray.length;
   };
 
-
-
-  // Function to check for keys in requiredOptions
   const checkForMissingValues = (): boolean => {
     // Iterate through requiredOptions
     for (const option of requiredOptions) {
-      // If the option is not in the data or its value is undefined, return true (indicating missing value)
+      // If the option is not in the data or its value is undefined, return false (indicating missing value)
       if (!(option in data) || data[option] === undefined) {
-        return true;
+        return false;
       }
     }
     // No missing values found
-    return false;
+    return true;
   };
-
-  // Check for duplicate values
-  const hasDuplicates = hasDuplicateValues();
-
-  // Check for keys in requiredOptions
-  const missingRequiredOption = checkForMissingValues();
-
-
   function onSubmit(e: FormEvent) {
     e.preventDefault();
+    // Check for duplicate values
+    const hasDuplicates = hasDuplicateValues();
 
-    if (!isLastStep) return next();
-    if (missingRequiredOption) {
-      // @ts-ignore
-      document.getElementById("missingValuesModal").showModal();
-      goTo(0);
-    } else if(hasDuplicates) {
-      // @ts-ignore
-      document.getElementById("duplicateValuesModal").showModal();
-      goTo(0);
-    } else {
-      // @ts-ignore
-      document.getElementById("configurationModal").showModal();
-      window.electron.ipcRenderer.sendMessage("ipc", ["generateConfig", data]);
-      return;
+    // Check for keys in requiredOptions
+    const hasAllOptions = checkForMissingValues();
+    console.log(hasAllOptions);
+    if (!isLastStep) { return next() }
+    else {
+      if (!hasAllOptions) {
+        // @ts-ignore
+        document.getElementById("missingValuesModal").showModal();
+        console.log("Data missing");
+        goTo(0);
+        setData(initialData);
+      } else if(hasDuplicates) {
+        // @ts-ignore
+        document.getElementById("duplicateValuesModal").showModal();
+        goTo(0);
+        setData(initialData);
+      } else {
+        // @ts-ignore
+        // document.getElementById("configurationModal").showModal();
+        window.electron.ipcRenderer.sendMessage("ipc", ["generateConfig", data]);
+        return;
+      }
     }
   }
 

@@ -11,53 +11,51 @@ export default function PrerequisiteForm({ updateFields }: any) {
             title="Enter some basic information about your board"
             content={
               <div className="grid grid-cols-1 grid-rows-4 grid-flow-row gap-10">
-                <SelectCard label={"Movement Key Layout"} updateFields={updateFields} choices={[
+                <SelectCard defaultValue="WASD" required label={"Movement Key Layout"} updateFields={updateFields} choices={[
                   {
-                    "key": "layout",
                     "value": "WASD"
                   },
                   {
-                    "key": "layout",
                     "value": "WASD Angled"
                   },
                   {
-                    "key": "layout",
                     "value": "Stick"
                   },
                   {
-                    "key": "layout",
                     "value": "Stickless"
                   },
                   {
-                    "key": "layout",
                     "value": "Dancepad"
                   },
                 ]} placeholder={"e.g WASD, Stickless"} />
 
-                <SelectCard label={"Action Key Layout"} updateFields={updateFields} choices={[
+                <SelectCard required defaultValue="Arcade" label={"Action Key Layout"} updateFields={updateFields} choices={[
                   {
-                    "key": "layout_right",
                     "value": "Arcade"
                   },
                   {
-                    "key": "layout_right",
                     "value": "Stickless"
                   },
                   {
-                    "key": "layout_right",
-                    "value": "Vewlix 8"
+                    "value": "Vewlix"
                   },
                   {
-                    "key": "layout_right",
                     "value": "Vewlix 7"
                   },
                   {
-                    "key": "layout_right",
                     "value": "Noir 8"
                   },
                   {
-                    "key": "layout_right",
                     "value": "Dancepad"
+                  },
+                  {
+                    "value": "Capcom"
+                  },
+                  {
+                    "value": "Capcom 6"
+                  },
+                  {
+                    "value": "Sega 2P"
                   },
                 ]} placeholder={"e.g WASD, Stickless, ..."} />
               </div>
